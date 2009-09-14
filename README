@@ -1,0 +1,15 @@
+Please read MITLicense.txt for license information.
+
+This is the source code repository for MultiFirefox.  Please be careful contributing patches!
+
+Warning:
+========
+
+The source code for MultiFirefox, while functional,
+is old, and one of my first attempts at Objective-C. 
+I haven't had any real time to rewrite chuncks of it,
+so if you have difficulty following it, or find 
+yourself laughing out loud at the way things were 
+done, just keep that in mind ;)
+
+- Dave Martorana
