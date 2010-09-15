@@ -17,13 +17,13 @@ BOOL alreadyChecked = NO;
 #pragma mark Standard Methods
 
 -(void) PopulateVersionValues{
-    NSArray *versionsArray = [MFF versionsList];
+    NSArray *versionsArray = [[MFF versionsList] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
     [mVersionsController addObjects:versionsArray];
     [mVersionsController setSelectionIndex:0];
 }
 
 -(void) PopulateProfileValues{
-    NSArray *profilesArray = [MFF profilesList];
+    NSArray *profilesArray = [[MFF profilesList] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
     [mProfilesController addObjects:profilesArray];
     [mProfilesController setSelectionIndex:0];
 }
