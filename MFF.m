@@ -106,7 +106,8 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
     {
         [dirEnum skipDescendents];
         
-        if ([[curFileFolderName lowercaseString] rangeOfString:@"firefox"].location == 0 &&
+        if ([[curFileFolderName lowercaseString] rangeOfString:@"firefox"].location == 0 ||
+            [[curFileFolderName lowercaseString] rangeOfString:@"minefield"].location == 0 &&
             [[curFileFolderName lowercaseString] rangeOfString:@".app"].location != NSNotFound)
         {                                  
             [versionsTemp addObject:[curFileFolderName substringToIndex:[[curFileFolderName lowercaseString] rangeOfString:@".app"].location]];
