@@ -92,7 +92,7 @@ BOOL alreadyChecked = NO;
     NSString *profileName = (NSString *)[[mProfilesController selectedObjects] objectAtIndex:0];
     NSString *versionName = [self GetSelectedVersion];
 
-    [MFF createApplicationWithVersion:versionName andProfile:profileName]
+    [MFF createApplicationWithVersion:versionName andProfile:profileName];
 }
 
 #pragma mark Common Functions
