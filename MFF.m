@@ -130,4 +130,9 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
     exit(0);
 }
 
++ (void) createApplicationWithVersion:(NSString *)version andProfile:(NSString *)profile
+{
+
+}
+
 @end
