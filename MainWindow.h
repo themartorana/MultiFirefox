@@ -21,6 +21,7 @@
 
 - (IBAction) LaunchFirefox:(id)sender;
 - (IBAction) ShowProfileManager:(id)sender;
+- (IBAction) CreateApplication:(id)sender;
 
 - (NSString *) GetSelectedVersion;
 
