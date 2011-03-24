@@ -1,3 +1,9 @@
+# Feature additions to themartorana's repo
+
+- Show all Minefield versions in the version list
+- Create application which always runs the selected Firefox version with the selected profile
+
+
 Please read MITLicense.txt for license information.
 
 This is the source code repository for MultiFirefox.  Please be careful contributing patches!

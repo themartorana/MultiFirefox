@@ -106,7 +106,8 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
     {
         [dirEnum skipDescendents];
         
-        if ([[curFileFolderName lowercaseString] rangeOfString:@"firefox"].location == 0 &&
+        if ([[curFileFolderName lowercaseString] rangeOfString:@"firefox"].location == 0 ||
+            [[curFileFolderName lowercaseString] rangeOfString:@"minefield"].location == 0 &&
             [[curFileFolderName lowercaseString] rangeOfString:@".app"].location != NSNotFound)
         {                                  
             [versionsTemp addObject:[curFileFolderName substringToIndex:[[curFileFolderName lowercaseString] rangeOfString:@".app"].location]];
@@ -128,6 +129,50 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
         
     // Exit this application
     exit(0);
+}
+
++ (void) createApplicationWithVersion:(NSString *)version andProfile:(NSString *)profile
+{
+    NSDictionary* errorDict;
+    NSAppleEventDescriptor* returnDescriptor = NULL;
+
+
+    NSString *firefoxPath = [[[@"" stringByAppendingString:(NSString*)__APPLICATIONS_PATH__] stringByAppendingPathComponent:[version stringByAppendingString:@".app"]] stringByAppendingPathComponent:@"Contents/MacOS/firefox-bin"];
+    NSString *appName = [[[@"" stringByAppendingString:version] stringByAppendingString:@"-"] stringByAppendingString:profile];
+    NSString *scriptSource = [NSString stringWithFormat:@"tell application \"AppleScript Editor\"\n\
+                                set myCommand to \"do shell script \\\"%@ -p %@ &> /dev/null &\\\"\"\n\
+                                set contents of document 1 to myCommand\n\
+                                set username to system attribute \"USER\"\n\
+                                compile document 1\n\
+                                set theResult to save document 1 as \"application\" in \"/Users/\" & username & \"/Desktop/%@.app\"\n\
+                                quit\n\
+                                end tell", firefoxPath, profile, appName];
+
+    NSAppleScript* scriptObject = [[NSAppleScript alloc] initWithSource:scriptSource];
+
+    returnDescriptor = [scriptObject executeAndReturnError: &errorDict];
+    [scriptObject release];
+
+    if (returnDescriptor != NULL)
+    {
+        // successful execution
+        if (kAENullEvent != [returnDescriptor descriptorType])
+        {
+            // script returned an AppleScript result
+            if (cAEList == [returnDescriptor descriptorType])
+            {
+                 // result is a list of other descriptors
+            }
+            else
+            {
+                // coerce the result to the appropriate ObjC type
+            }
+        }
+    }
+    else
+    {
+        // no script result, handle error here
+    }
 }
 
 @end

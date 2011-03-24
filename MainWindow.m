@@ -88,6 +88,13 @@ BOOL alreadyChecked = NO;
     [MFF openFirefoxProfilesWindow:[self GetSelectedVersion]];
 }
 
+-(IBAction)CreateApplication:(id)sender {
+    NSString *profileName = (NSString *)[[mProfilesController selectedObjects] objectAtIndex:0];
+    NSString *versionName = [self GetSelectedVersion];
+
+    [MFF createApplicationWithVersion:versionName andProfile:profileName];
+}
+
 #pragma mark Common Functions
 
 - (NSString *)GetSelectedVersion
