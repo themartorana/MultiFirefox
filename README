@@ -16,6 +16,9 @@ the way things were done, just keep that in mind ;)
 
 CHANGE LOG:
 
+2.2.004 (curtish)
+- UI tweaks
+
 2.2.003 (halbtuerke)
 - include Minefield versions in the version list
 - new button to create application to always launch selected version and profile
