@@ -47,7 +47,7 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
         //only add prefix for anything less than 10.6
         if (MacVersion < 0x1060) 
         {
-            prefix = @"/usr/bin/arch -i386 ";
+            prefix = @"/usr/bin/arch -$(/usr/bin/arch) ";
         }
 
     }
