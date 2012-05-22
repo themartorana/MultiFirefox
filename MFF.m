@@ -19,8 +19,8 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
 + (void)openFirefoxProfilesWindow:(NSString *)version
 {
     NSLog(@"version: %@", version);
-    
-    NSString *toBeCalled = [[@"'" stringByAppendingString:[self getFirefoxPath:version]] stringByAppendingString: @"' --profilemanager &"];
+        
+    NSString *toBeCalled = [[self getFirefoxCmd:version] stringByAppendingString: @" --profilemanager &"];
     
     NSLog(@"%@", [@"Profile Launch call: " stringByAppendingString:toBeCalled]);
     
@@ -32,6 +32,28 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
 {
     NSString *firefoxPath = [[__APPLICATIONS_PATH__ stringByAppendingPathComponent:[version stringByAppendingString:@".app"]] stringByAppendingPathComponent:@"Contents/MacOS/firefox-bin"];
     return firefoxPath;
+}
+
++ (NSString *) getFirefoxCmd:(NSString *)version
+{
+    SInt32 MacVersion;
+    NSString *prefix = @"";
+
+    //try to get version info
+    if (Gestalt(gestaltSystemVersion, &MacVersion) == noErr) 
+    {
+        NSLog(@"MacVersion: %x", MacVersion);
+
+        //only add prefix for anything less than 10.6
+        if (MacVersion < 0x1060) 
+        {
+            prefix = @"/usr/bin/arch -$(/usr/bin/arch) ";
+        }
+
+    }
+
+    NSString *firefoxCmd = [[[prefix stringByAppendingString:@"'"] stringByAppendingString:[self getFirefoxPath:version]] stringByAppendingString:@"'"];
+    return firefoxCmd;
 }
 
 // Check to be sure there aren't multiple profiles
@@ -121,11 +143,14 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
 + (void) launchFirefox:(NSString *)version withProfile:(NSString *)profile
 {
     // Construct the exe path
-    NSString *firefoxPath = [[[[@"'" stringByAppendingString:(NSString*)__APPLICATIONS_PATH__] stringByAppendingPathComponent:[version stringByAppendingString:@".app"]] stringByAppendingPathComponent:@"Contents/MacOS/firefox-bin"] stringByAppendingString:@"'"];
-    NSLog(@"Launching: %@", firefoxPath);
+
+    NSString *firefoxPath = [self getFirefoxCmd:version];
+    NSString *cmd = [[[[firefoxPath stringByAppendingString:@" -no-remote -P "] stringByAppendingString:@"'"] stringByAppendingString:profile] stringByAppendingString:@"' &"];
+    NSLog(@"Launching: %@", cmd);
+
     // Construct and send the shell command
-    system([[[[[firefoxPath stringByAppendingString:@" -no-remote -P "] stringByAppendingString:@"'"] stringByAppendingString:profile] stringByAppendingString:@"' &"] UTF8String]);
-        
+    system([cmd UTF8String]);
+
     // Exit this application
     exit(0);
 }

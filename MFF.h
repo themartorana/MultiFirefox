@@ -18,5 +18,6 @@
 + (NSArray *) versionsList;
 + (void) launchFirefox:(NSString *)version withProfile:(NSString *)profile;
 + (NSString *) getFirefoxPath:(NSString *)version;
++ (NSString *) getFirefoxCmd:(NSString *)version;
 
 @end
