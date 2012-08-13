@@ -3,3 +3,5 @@ build
 *.perspectivev3
 *.pbxuser
 *.model1v3
+*.xcuserdatad
+*.xcworkspacedata
