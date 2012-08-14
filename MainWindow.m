@@ -41,7 +41,6 @@ BOOL alreadyChecked = NO;
     
     [self PopulateProfileValues];
     [self PopulateVersionValues];
-    [mLaunchButton setKeyEquivalent:@"\r"];
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString* lastVersion = [defaults objectForKey:@"lastVersion"];

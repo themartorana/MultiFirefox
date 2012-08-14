@@ -39,7 +39,7 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
 {
     // Create the appropriate folder name
     NSString *folderName = [__FIREFOX_PROFILE_PATH__ stringByExpandingTildeInPath];
-    NSArray *folderContents = [[NSFileManager defaultManager] directoryContentsAtPath:folderName];
+    NSArray *folderContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderName error:nil];
     
     // Get the number of directories
     int count = [folderContents count];
@@ -66,7 +66,7 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
     {
         // Get the contents of the file by line
         //NSArray *values = [[[[NSString alloc] initWithContentsOfFile:profilesFile] componentsSeparatedByString:@"\n"] autorelease];
-        NSString* fileContents = [[[NSString alloc] initWithContentsOfFile:profilesFile] autorelease];
+        NSString* fileContents = [[[NSString alloc] initWithContentsOfFile:profilesFile encoding:NSUTF8StringEncoding error:nil] autorelease];
         NSArray *values = [fileContents componentsSeparatedByString:@"\n"];
         NSEnumerator *valuesEnum = [values objectEnumerator];
         
