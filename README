@@ -24,7 +24,7 @@ Because of its elementary nature, MultiFirefox looks for any app in your /Applic
 /Applications/Firefox 3.3
 /Applications/Firefox 2
 
-When you launch MultiFirefox the first time, it will ask you to create a profile. At any time you can use MultiFirefox to launch Firefox's built-in Profile Manager. Best practice is to create one profile per browser version, and it makes sense to name those profiles in conjunction with the browser version you will use them for. 
+When you launch MultiFirefox the first time, it will ask you to create a profile. At any time you can use MultiFirefox to launch Firefox's built-in Profile Manager. Best practice is to create one profile per browser version, and it makes sense to name those profiles in conjunction with the browser version you will use them for.
 
 NOTE: You can have as many profiles as you like, including several for the same version!
 
@@ -32,6 +32,10 @@ When MultiFirefox launches, simply select a browser version, and the profile you
 
 
 CHANGE LOG:
+
+2.3.0 (gilmoreorless)
+- New UI with better resizing response
+- Auto-focus on launch button
 
 2.2.004 (curtisharvey)
 - UI tweaks
