@@ -135,11 +135,15 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
 // Launch Firefox with the selected profile
 + (void) launchFirefox:(NSString *)version withProfile:(NSString *)profile
 {
-    // Construct the exe path
-    NSString *firefoxPath = [[[[@"'" stringByAppendingString:(NSString*)__APPLICATIONS_PATH__] stringByAppendingPathComponent:[version stringByAppendingString:@".app"]] stringByAppendingPathComponent:@"Contents/MacOS/firefox-bin"] stringByAppendingString:@"'"];
-    NSLog(@"Launching: %@", firefoxPath);
-    // Construct and send the shell command
-    system([[[[[firefoxPath stringByAppendingString:@" -no-remote -P "] stringByAppendingString:@"'"] stringByAppendingString:profile] stringByAppendingString:@"' &"] UTF8String]);
+    // Construct the command using 'open'
+    NSArray *cmdParts = [NSArray arrayWithObjects:@"open -a \"",
+                         [__APPLICATIONS_PATH__ stringByAppendingPathComponent:version],
+                         @".app\" --args -no-remote -P \"",
+                         profile,
+                         @"\"",
+                         nil];
+    // Send the shell command
+    system([[cmdParts componentsJoinedByString:@""] UTF8String]);
         
     // Exit this application
     exit(0);
