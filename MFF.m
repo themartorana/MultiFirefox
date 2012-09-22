@@ -101,16 +101,30 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
     NSDirectoryEnumerator *dirEnum = [[NSFileManager defaultManager] enumeratorAtPath:(NSString*)__APPLICATIONS_PATH__];
     NSMutableArray *versionsTemp = [NSMutableArray arrayWithCapacity:0];
     NSString *curFileFolderName;
+    NSString *lowerFileFolderName;
+    NSString *extension;
+    BOOL isApp;
+    BOOL isFirefox;
     
     while (curFileFolderName = [dirEnum nextObject])
     {
-        [dirEnum skipDescendents];
+        lowerFileFolderName = [curFileFolderName lowercaseString];
+        extension = [curFileFolderName pathExtension];
+        isApp = [extension isEqualToString:@"app"];
+        isFirefox = ([lowerFileFolderName rangeOfString:@"firefox"].location == 0 ||
+                     [lowerFileFolderName rangeOfString:@"minefield"].location == 0);
         
-        if ([[curFileFolderName lowercaseString] rangeOfString:@"firefox"].location == 0 ||
-            [[curFileFolderName lowercaseString] rangeOfString:@"minefield"].location == 0 &&
-            [[curFileFolderName lowercaseString] rangeOfString:@".app"].location != NSNotFound)
-        {                                  
-            [versionsTemp addObject:[curFileFolderName substringToIndex:[[curFileFolderName lowercaseString] rangeOfString:@".app"].location]];
+        if (isFirefox)
+        {
+            if (isApp)
+            {
+                [versionsTemp addObject:[curFileFolderName substringToIndex:[lowerFileFolderName rangeOfString:@".app"].location]];
+                [dirEnum skipDescendents];
+            }
+        }
+        else
+        {
+            [dirEnum skipDescendents];
         }
     }
 
