@@ -824,10 +824,9 @@
 										<object class="NSButton" id="1003973801">
 											<reference key="NSNextResponder" ref="976076399"/>
 											<int key="NSvFlags">292</int>
-											<string key="NSFrame">{{0, 18}, {172, 25}}</string>
+											<string key="NSFrame">{{0, 11}, {172, 32}}</string>
 											<reference key="NSSuperview" ref="976076399"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView"/>
 											<int key="NSViewLayerContentsRedrawPolicy">2</int>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSButtonCell" key="NSCell" id="205066439">
@@ -837,7 +836,7 @@
 												<reference key="NSSupport" ref="1048428097"/>
 												<reference key="NSControlView" ref="1003973801"/>
 												<int key="NSButtonFlags">-2036973313</int>
-												<int key="NSButtonFlags2">35</int>
+												<int key="NSButtonFlags2">1</int>
 												<object class="NSFont" key="NSAlternateImage">
 													<string key="NSName">LucidaGrande</string>
 													<double key="NSSize">13</double>
@@ -1035,7 +1034,7 @@
 										<object class="NSButton" id="442024780">
 											<reference key="NSNextResponder" ref="499694924"/>
 											<int key="NSvFlags">292</int>
-											<string key="NSFrame">{{0, 18}, {172, 25}}</string>
+											<string key="NSFrame">{{0, 11}, {172, 32}}</string>
 											<reference key="NSSuperview" ref="499694924"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="976076399"/>
@@ -1046,8 +1045,9 @@
 												<string key="NSContents">Profile Manager</string>
 												<reference key="NSSupport" ref="1048428097"/>
 												<reference key="NSControlView" ref="442024780"/>
-												<int key="NSButtonFlags">-2038152961</int>
-												<int key="NSButtonFlags2">35</int>
+												<int key="NSButtonFlags">-2038021889</int>
+												<int key="NSButtonFlags2">1</int>
+												<reference key="NSAlternateImage" ref="1048428097"/>
 												<string key="NSAlternateContents"/>
 												<string key="NSKeyEquivalent"/>
 												<int key="NSPeriodicDelay">400</int>
