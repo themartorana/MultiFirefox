@@ -784,7 +784,7 @@
 							<string key="NSFrame">{{31, 22}, {103, 18}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="499694924"/>
+							<reference key="NSNextKeyView" ref="450430880"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="817596107">
 								<int key="NSCellFlags">-2080244224</int>
@@ -827,6 +827,7 @@
 											<string key="NSFrame">{{0, 11}, {172, 32}}</string>
 											<reference key="NSSuperview" ref="976076399"/>
 											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView"/>
 											<int key="NSViewLayerContentsRedrawPolicy">2</int>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSButtonCell" key="NSCell" id="205066439">
@@ -1195,6 +1196,7 @@
 							<string key="NSFrame">{{132, -20}, {397, 322}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView" ref="499694924"/>
 							<string key="NSClassName">NSView</string>
 						</object>
 					</object>
@@ -1563,9 +1565,9 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">initialFirstResponder</string>
 						<reference key="source" ref="972006081"/>
-						<reference key="destination" ref="1003973801"/>
+						<reference key="destination" ref="64727338"/>
 					</object>
-					<int key="connectionID">547</int>
+					<int key="connectionID">559</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -1582,6 +1584,14 @@
 						<reference key="destination" ref="929214725"/>
 					</object>
 					<int key="connectionID">554</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">nextKeyView</string>
+						<reference key="source" ref="801291445"/>
+						<reference key="destination" ref="64727338"/>
+					</object>
+					<int key="connectionID">561</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1785,9 +1795,9 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">nextKeyView</string>
 						<reference key="source" ref="219558262"/>
-						<reference key="destination" ref="801291445"/>
+						<reference key="destination" ref="478637039"/>
 					</object>
-					<int key="connectionID">553</int>
+					<int key="connectionID">560</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2865,7 +2875,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">558</int>
+			<int key="maxID">561</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
