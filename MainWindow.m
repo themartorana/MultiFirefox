@@ -39,9 +39,10 @@ BOOL alreadyChecked = NO;
                    afterDelay:1.0];
     }
     
-    [mVersionsTable setDelegate:self];
     [self PopulateProfileValues];
     [self PopulateVersionValues];
+    [mVersionsTable setDelegate:self];
+    [mVersionsTable setDoubleAction:@selector(LaunchFirefox:)];
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString* lastVersion = [defaults objectForKey:@"lastVersion"];
