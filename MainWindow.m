@@ -39,6 +39,7 @@ BOOL alreadyChecked = NO;
                    afterDelay:1.0];
     }
     
+    [mVersionsTable setDelegate:self];
     [self PopulateProfileValues];
     [self PopulateVersionValues];
     
@@ -102,6 +103,30 @@ BOOL alreadyChecked = NO;
 {
     NSString *versionName = (NSString *)[[mVersionsController selectedObjects] objectAtIndex:0];
     return versionName;
+}
+
+- (void) SelectProfileForVersion:(NSString *)version {
+    // Strip any directory paths
+    version = [version lastPathComponent];
+    BOOL versionIsPlain = [[version lowercaseString] isEqualToString:@"firefox"];
+
+    // Find the first profile whose name starts with the version name
+    NSArray *profiles = [mProfilesController arrangedObjects];
+    for (NSString *profile in profiles) {
+        if (
+            (versionIsPlain && [profile isEqualToString:@"default"]) ||
+            [profile hasPrefix:version]
+        ) {
+            [mProfilesController setSelectedObjects:[NSArray arrayWithObject:profile]];
+            break;
+        }
+    }
+}
+
+#pragma mark NSTableView Delegates
+
+- (void)tableViewSelectionDidChange:(NSNotification *)notification {
+    [self SelectProfileForVersion:[self GetSelectedVersion]];
 }
 
 #pragma mark Window Delegates

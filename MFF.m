@@ -121,6 +121,7 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
                 [versionsTemp addObject:[curFileFolderName substringToIndex:[lowerFileFolderName rangeOfString:@".app"].location]];
                 [dirEnum skipDescendents];
             }
+            // Recurse into any non-app Firefox directories
         }
         else
         {

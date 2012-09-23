@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface MainWindowController : NSWindowController {
+@interface MainWindowController : NSWindowController <NSTableViewDelegate> {
     IBOutlet NSButton *mLaunchButton;
     IBOutlet NSButton *mShowProfileManagerButton;
     
@@ -24,6 +24,7 @@
 - (IBAction) CreateApplication:(id)sender;
 
 - (NSString *) GetSelectedVersion;
+- (void) SelectProfileForVersion:(NSString *)version;
 
 - (void) PopulateVersionValues;
 - (void) PopulateProfileValues;
