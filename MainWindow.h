@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface MainWindowController : NSWindowController <NSTableViewDelegate> {
+@interface MainWindowController : NSWindowController <NSWindowDelegate, NSTableViewDelegate> {
     IBOutlet NSButton *mLaunchButton;
     IBOutlet NSButton *mShowProfileManagerButton;
     

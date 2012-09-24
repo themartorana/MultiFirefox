@@ -11,19 +11,21 @@
 
 @implementation MainWindowController
 
-// Set the value
-BOOL alreadyChecked = NO;
+// Determines if profile list should refresh on window focus
+BOOL shouldReloadProfiles = NO;
 
 #pragma mark Standard Methods
 
--(void) PopulateVersionValues{
+-(void) PopulateVersionValues {
     NSArray *versionsArray = [[MFF versionsList] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+    [mVersionsController removeObjects:[mVersionsController arrangedObjects]];
     [mVersionsController addObjects:versionsArray];
     [mVersionsController setSelectionIndex:0];
 }
 
--(void) PopulateProfileValues{
+-(void) PopulateProfileValues {
     NSArray *profilesArray = [[MFF profilesList] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+    [mProfilesController removeObjects:[mProfilesController arrangedObjects]];
     [mProfilesController addObjects:profilesArray];
     [mProfilesController setSelectionIndex:0];
 }
@@ -32,6 +34,8 @@ BOOL alreadyChecked = NO;
 
 - (void) awakeFromNib
 {
+    [[self window] setDelegate:self];
+    
     // Check to be sure there are multiple profiles
     if (![MFF multipleProfilesExist]){
         [self performSelector:@selector(showNotEnoughProfilesThingy) 
@@ -88,6 +92,7 @@ BOOL alreadyChecked = NO;
 }
 
 -(IBAction)ShowProfileManager:(id)sender {
+    shouldReloadProfiles = YES;
     [MFF openFirefoxProfilesWindow:[self GetSelectedVersion]];
 }
 
@@ -132,9 +137,17 @@ BOOL alreadyChecked = NO;
 
 #pragma mark Window Delegates
 
-- (BOOL)windowWillClose:(NSNotification *)notification {
+- (void)windowWillClose:(NSNotification *)notification {
     [NSApp terminate:self];
-    return NO;
+}
+
+- (void)windowDidBecomeMain:(NSNotification *)notification {
+    if (shouldReloadProfiles) {
+        NSArray *oldValues = [mProfilesController selectedObjects];
+        [self PopulateProfileValues];
+        [mProfilesController setSelectedObjects:oldValues];
+        shouldReloadProfiles = NO;
+    }
 }
 
 -(void)noProfilesOKClick:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void  *)contextInfo{

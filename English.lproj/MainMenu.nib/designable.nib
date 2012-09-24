@@ -781,7 +781,7 @@
 						<object class="NSButton" id="219558262">
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">292</int>
-							<string key="NSFrame">{{31, 22}, {103, 18}}</string>
+							<string key="NSFrame">{{31, 20}, {103, 18}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="450430880"/>
@@ -2687,6 +2687,7 @@
 					<string>371.IBWindowTemplateEditedContentRect</string>
 					<string>371.NSWindowTemplate.visibleAtLaunch</string>
 					<string>372.IBPluginDependency</string>
+					<string>372.IBUserGuides</string>
 					<string>405.IBPluginDependency</string>
 					<string>405.IBViewIntegration.shadowBlurRadius</string>
 					<string>405.IBViewIntegration.shadowColor</string>
@@ -2723,6 +2724,7 @@
 					<string>526.IBPluginDependency</string>
 					<string>527.IBPluginDependency</string>
 					<string>556.IBPluginDependency</string>
+					<string>556.IBUserGuides</string>
 					<string>557.IBPluginDependency</string>
 					<string>558.IBPluginDependency</string>
 					<string>56.IBPluginDependency</string>
@@ -2808,6 +2810,9 @@
 					<string>{{215, 457}, {432, 399}}</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<object class="NSMutableArray">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="0"/>
 					<reference ref="412158681"/>
@@ -2844,6 +2849,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<object class="NSMutableArray">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
