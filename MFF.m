@@ -20,9 +20,9 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
 {
     NSLog(@"version: %@", version);
     
-    NSString *toBeCalled = [[@"'" stringByAppendingString:[self getFirefoxPath:version]] stringByAppendingString: @"' --profilemanager &"];
+    NSString *toBeCalled = [[@"open \"" stringByAppendingString:[self getFirefoxPath:version]] stringByAppendingString: @"\" --args --profilemanager"];
     
-    NSLog(@"%@", [@"Profile Launch call: " stringByAppendingString:toBeCalled]);
+    NSLog(@"Profile Launch call: %@", toBeCalled);
     
     system([toBeCalled UTF8String]);
     
@@ -30,7 +30,7 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
 
 + (NSString *) getFirefoxPath:(NSString *)version
 {
-    NSString *firefoxPath = [[__APPLICATIONS_PATH__ stringByAppendingPathComponent:[version stringByAppendingString:@".app"]] stringByAppendingPathComponent:@"Contents/MacOS/firefox-bin"];
+    NSString *firefoxPath = [__APPLICATIONS_PATH__ stringByAppendingPathComponent:[version stringByAppendingString:@".app"]];
     return firefoxPath;
 }
 
