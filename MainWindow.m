@@ -63,7 +63,7 @@ BOOL shouldReloadProfiles = NO;
 
 - (void) showNotEnoughProfilesThingy
 {
-    NSString *msg = @"You only have one profile set up for Firefox.  In order to run multiple versions of Firefox side by side, you must have multiple profiles defined.\n\nClick OK to open the profile manager.  Once you've set up a seperate multiple profiles, please relaunch MultiFirefox.";
+    NSString *msg = @"You only have one profile set up for Firefox.  In order to run multiple versions of Firefox side by side, you must have multiple profiles defined.\n\nClick OK to open the profile manager.";
     NSBeginAlertSheet(@"You need to create a profile!", 
                       @"OK", 
                       nil, 
@@ -151,8 +151,7 @@ BOOL shouldReloadProfiles = NO;
 }
 
 -(void)noProfilesOKClick:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void  *)contextInfo{
-    [MFF openFirefoxProfilesWindow:[self GetSelectedVersion]];
-    [NSApp terminate:self];
+    [self ShowProfileManager:nil];
 }
 
 #pragma mark Application Delegates
