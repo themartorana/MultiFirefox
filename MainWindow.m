@@ -34,8 +34,6 @@ BOOL shouldReloadProfiles = NO;
 
 - (void) awakeFromNib
 {
-    [[self window] setDelegate:self];
-    
     // Check to be sure there are multiple profiles
     if (![MFF multipleProfilesExist]){
         [self performSelector:@selector(showNotEnoughProfilesThingy) 
@@ -78,7 +76,6 @@ BOOL shouldReloadProfiles = NO;
 
 -(IBAction)LaunchFirefox:(id)sender {
     NSString *profileName = (NSString *)[[mProfilesController selectedObjects] objectAtIndex:0];
-    //NSString *versionName = (NSString *)[[mVersionsController selectedObject] self];
     NSString *versionName = [self GetSelectedVersion];
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
@@ -86,7 +83,7 @@ BOOL shouldReloadProfiles = NO;
     [defaults setObject:versionName forKey:@"lastVersion"];
     [defaults synchronize];
     
-    NSLog(@"%@", [profileName stringByAppendingString:versionName]);
+    NSLog(@"Version: %@ / Profile: %@", versionName, profileName);
     
     [MFF launchFirefox:versionName withProfile:profileName];
 }
