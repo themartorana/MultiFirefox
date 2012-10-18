@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface MainWindowController : NSWindowController {
+@interface MainWindowController : NSWindowController <NSWindowDelegate, NSTableViewDelegate> {
     IBOutlet NSButton *mLaunchButton;
     IBOutlet NSButton *mShowProfileManagerButton;
     
@@ -21,8 +21,10 @@
 
 - (IBAction) LaunchFirefox:(id)sender;
 - (IBAction) ShowProfileManager:(id)sender;
+- (IBAction) CreateApplication:(id)sender;
 
 - (NSString *) GetSelectedVersion;
+- (void) SelectProfileForVersion:(NSString *)version;
 
 - (void) PopulateVersionValues;
 - (void) PopulateProfileValues;
