@@ -1,16 +1,15 @@
 Please read MITLicense.txt for license information.
 
-This is the source code repository for MultiFirefox.  Please be careful contributing patches!
+This is the source code repository for MultiFirefox.  Please be careful
+contributing patches!
 
 Warning:
 ========
 
-The source code for MultiFirefox, while functional,
-is old, and one of my first attempts at Objective-C. 
-I haven't had any real time to rewrite chuncks of it,
-so if you have difficulty following it, or find 
-yourself laughing out loud at the way things were 
-done, just keep that in mind ;)
+The source code for MultiFirefox, while functional, is old, and one of my first
+attempts at Objective-C. I haven't had any real time to rewrite chunks of it,
+so if you have difficulty following it, or find yourself laughing out loud at
+the way things were done, just keep that in mind ;)
 
 - Dave Martorana
 
@@ -25,8 +24,35 @@ Because of its elementary nature, MultiFirefox looks for any app in your /Applic
 /Applications/Firefox 3.3
 /Applications/Firefox 2
 
-When you launch MultiFirefox the first time, it will ask you to create a profile. At any time you can use MultiFirefox to launch Firefox's built-in Profile Manager. Best practice is to create one profile per browser version, and it makes sense to name those profiles in conjunction with the browser version you will use them for. 
+When you launch MultiFirefox the first time, it will ask you to create a profile. At any time you can use MultiFirefox to launch Firefox's built-in Profile Manager.
+Best practice is to create one profile per browser version, and it makes sense to name those profiles in conjunction with the browser version you will use them for.
 
 NOTE: You can have as many profiles as you like, including several for the same version!
 
 When MultiFirefox launches, simply select a browser version, and the profile you've created for it, and voila!
+If you've followed the best practice above, the appropriate profile will be selected for you when you select a version.
+
+
+CHANGE LOG:
+
+2.3.0 (gilmoreorless)
+- New UI with better resizing response
+- Recurse into "Firefox" sub-directories to pick up installs from FFV script (https://github.com/micmcg/FFV)
+- Auto-focus on launch button
+- Open Firefox and Profile Manager in the foreground
+- Auto-reload profiles after launching Profile Manager
+- Selecting a version auto-selects a similarly named profile
+- Double-click on version name launches Firefox
+
+2.2.004 (curtisharvey)
+- UI tweaks
+
+2.2.003 (halbtuerke)
+- include Minefield versions in the version list
+- new button to create application to always launch selected version and profile
+
+2.2.002 (curtisharvey)
+- sort Profiles and Firefox versions
+
+2.2.001 (themartorana)
+- initial release (on github)

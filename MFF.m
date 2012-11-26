@@ -20,9 +20,9 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
 {
     NSLog(@"version: %@", version);
     
-    NSString *toBeCalled = [[@"'" stringByAppendingString:[self getFirefoxPath:version]] stringByAppendingString: @"' --profilemanager &"];
+    NSString *toBeCalled = [[@"open \"" stringByAppendingString:[self getFirefoxPath:version]] stringByAppendingString: @"\" --args --profilemanager"];
     
-    NSLog(@"%@", [@"Profile Launch call: " stringByAppendingString:toBeCalled]);
+    NSLog(@"Profile Launch call: %@", toBeCalled);
     
     system([toBeCalled UTF8String]);
     
@@ -30,7 +30,7 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
 
 + (NSString *) getFirefoxPath:(NSString *)version
 {
-    NSString *firefoxPath = [[__APPLICATIONS_PATH__ stringByAppendingPathComponent:[version stringByAppendingString:@".app"]] stringByAppendingPathComponent:@"Contents/MacOS/firefox-bin"];
+    NSString *firefoxPath = [__APPLICATIONS_PATH__ stringByAppendingPathComponent:[version stringByAppendingString:@".app"]];
     return firefoxPath;
 }
 
@@ -39,7 +39,7 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
 {
     // Create the appropriate folder name
     NSString *folderName = [__FIREFOX_PROFILE_PATH__ stringByExpandingTildeInPath];
-    NSArray *folderContents = [[NSFileManager defaultManager] directoryContentsAtPath:folderName];
+    NSArray *folderContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderName error:nil];
     
     // Get the number of directories
     int count = [folderContents count];
@@ -66,7 +66,7 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
     {
         // Get the contents of the file by line
         //NSArray *values = [[[[NSString alloc] initWithContentsOfFile:profilesFile] componentsSeparatedByString:@"\n"] autorelease];
-        NSString* fileContents = [[[NSString alloc] initWithContentsOfFile:profilesFile] autorelease];
+        NSString* fileContents = [[[NSString alloc] initWithContentsOfFile:profilesFile encoding:NSUTF8StringEncoding error:nil] autorelease];
         NSArray *values = [fileContents componentsSeparatedByString:@"\n"];
         NSEnumerator *valuesEnum = [values objectEnumerator];
         
@@ -101,15 +101,31 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
     NSDirectoryEnumerator *dirEnum = [[NSFileManager defaultManager] enumeratorAtPath:(NSString*)__APPLICATIONS_PATH__];
     NSMutableArray *versionsTemp = [NSMutableArray arrayWithCapacity:0];
     NSString *curFileFolderName;
+    NSString *lowerFileFolderName;
+    NSString *extension;
+    BOOL isApp;
+    BOOL isFirefox;
     
     while (curFileFolderName = [dirEnum nextObject])
     {
-        [dirEnum skipDescendents];
+        lowerFileFolderName = [curFileFolderName lowercaseString];
+        extension = [curFileFolderName pathExtension];
+        isApp = [extension isEqualToString:@"app"];
+        isFirefox = ([lowerFileFolderName rangeOfString:@"firefox"].location == 0 ||
+                     [lowerFileFolderName rangeOfString:@"minefield"].location == 0);
         
-        if ([[curFileFolderName lowercaseString] rangeOfString:@"firefox"].location == 0 &&
-            [[curFileFolderName lowercaseString] rangeOfString:@".app"].location != NSNotFound)
-        {                                  
-            [versionsTemp addObject:[curFileFolderName substringToIndex:[[curFileFolderName lowercaseString] rangeOfString:@".app"].location]];
+        if (isFirefox)
+        {
+            if (isApp)
+            {
+                [versionsTemp addObject:[curFileFolderName substringToIndex:[lowerFileFolderName rangeOfString:@".app"].location]];
+                [dirEnum skipDescendents];
+            }
+            // Don't call skipDescendents here so we can recurse into any non-app Firefox directories
+        }
+        else
+        {
+            [dirEnum skipDescendents];
         }
     }
 
@@ -120,14 +136,62 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
 // Launch Firefox with the selected profile
 + (void) launchFirefox:(NSString *)version withProfile:(NSString *)profile
 {
-    // Construct the exe path
-    NSString *firefoxPath = [[[[@"'" stringByAppendingString:(NSString*)__APPLICATIONS_PATH__] stringByAppendingPathComponent:[version stringByAppendingString:@".app"]] stringByAppendingPathComponent:@"Contents/MacOS/firefox-bin"] stringByAppendingString:@"'"];
-    NSLog(@"Launching: %@", firefoxPath);
-    // Construct and send the shell command
-    system([[[[[firefoxPath stringByAppendingString:@" -no-remote -P "] stringByAppendingString:@"'"] stringByAppendingString:profile] stringByAppendingString:@"' &"] UTF8String]);
+    // Construct the command using 'open'
+    NSArray *cmdParts = [NSArray arrayWithObjects:@"open -a \"",
+                         [__APPLICATIONS_PATH__ stringByAppendingPathComponent:version],
+                         @".app\" --args -no-remote -P \"",
+                         profile,
+                         @"\"",
+                         nil];
+    // Send the shell command
+    system([[cmdParts componentsJoinedByString:@""] UTF8String]);
         
     // Exit this application
     exit(0);
+}
+
++ (void) createApplicationWithVersion:(NSString *)version andProfile:(NSString *)profile
+{
+    NSDictionary* errorDict;
+    NSAppleEventDescriptor* returnDescriptor = NULL;
+
+
+    NSString *firefoxPath = [[[@"" stringByAppendingString:(NSString*)__APPLICATIONS_PATH__] stringByAppendingPathComponent:[version stringByAppendingString:@".app"]] stringByAppendingPathComponent:@"Contents/MacOS/firefox-bin"];
+    NSString *appName = [[[@"" stringByAppendingString:version] stringByAppendingString:@"-"] stringByAppendingString:profile];
+    NSString *scriptSource = [NSString stringWithFormat:@"tell application \"AppleScript Editor\"\n\
+                                set myCommand to \"do shell script \\\"%@ -p %@ &> /dev/null &\\\"\"\n\
+                                set contents of document 1 to myCommand\n\
+                                set username to system attribute \"USER\"\n\
+                                compile document 1\n\
+                                set theResult to save document 1 as \"application\" in \"/Users/\" & username & \"/Desktop/%@.app\"\n\
+                                quit\n\
+                                end tell", firefoxPath, profile, appName];
+
+    NSAppleScript* scriptObject = [[NSAppleScript alloc] initWithSource:scriptSource];
+
+    returnDescriptor = [scriptObject executeAndReturnError: &errorDict];
+    [scriptObject release];
+
+    if (returnDescriptor != NULL)
+    {
+        // successful execution
+        if (kAENullEvent != [returnDescriptor descriptorType])
+        {
+            // script returned an AppleScript result
+            if (cAEList == [returnDescriptor descriptorType])
+            {
+                 // result is a list of other descriptors
+            }
+            else
+            {
+                // coerce the result to the appropriate ObjC type
+            }
+        }
+    }
+    else
+    {
+        // no script result, handle error here
+    }
 }
 
 @end

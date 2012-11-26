@@ -11,19 +11,21 @@
 
 @implementation MainWindowController
 
-// Set the value
-BOOL alreadyChecked = NO;
+// Determines if profile list should refresh on window focus
+BOOL shouldReloadProfiles = NO;
 
 #pragma mark Standard Methods
 
--(void) PopulateVersionValues{
-    NSArray *versionsArray = [MFF versionsList];
+-(void) PopulateVersionValues {
+    NSArray *versionsArray = [[MFF versionsList] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+    [mVersionsController removeObjects:[mVersionsController arrangedObjects]];
     [mVersionsController addObjects:versionsArray];
     [mVersionsController setSelectionIndex:0];
 }
 
--(void) PopulateProfileValues{
-    NSArray *profilesArray = [MFF profilesList];
+-(void) PopulateProfileValues {
+    NSArray *profilesArray = [[MFF profilesList] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+    [mProfilesController removeObjects:[mProfilesController arrangedObjects]];
     [mProfilesController addObjects:profilesArray];
     [mProfilesController setSelectionIndex:0];
 }
@@ -41,6 +43,8 @@ BOOL alreadyChecked = NO;
     
     [self PopulateProfileValues];
     [self PopulateVersionValues];
+    [mVersionsTable setDelegate:self];
+    [mVersionsTable setDoubleAction:@selector(LaunchFirefox:)];
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString* lastVersion = [defaults objectForKey:@"lastVersion"];
@@ -52,11 +56,12 @@ BOOL alreadyChecked = NO;
     if (lastProfile) {
         [mProfilesController setSelectedObjects:[NSArray arrayWithObject:lastProfile]];    
     }
+  
 }
 
 - (void) showNotEnoughProfilesThingy
 {
-    NSString *msg = @"You only have one profile set up for Firefox.  In order to run multiple versions of Firefox side by side, you must have multiple profiles defined.\n\nClick OK to open the profile manager.  Once you've set up a seperate multiple profiles, please relaunch MultiFirefox.";
+    NSString *msg = @"You only have one profile set up for Firefox.  In order to run multiple versions of Firefox side by side, you must have multiple profiles defined.\n\nClick OK to open the profile manager.";
     NSBeginAlertSheet(@"You need to create a profile!", 
                       @"OK", 
                       nil, 
@@ -71,7 +76,6 @@ BOOL alreadyChecked = NO;
 
 -(IBAction)LaunchFirefox:(id)sender {
     NSString *profileName = (NSString *)[[mProfilesController selectedObjects] objectAtIndex:0];
-    //NSString *versionName = (NSString *)[[mVersionsController selectedObject] self];
     NSString *versionName = [self GetSelectedVersion];
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
@@ -79,13 +83,21 @@ BOOL alreadyChecked = NO;
     [defaults setObject:versionName forKey:@"lastVersion"];
     [defaults synchronize];
     
-    NSLog(@"%@", [profileName stringByAppendingString:versionName]);
+    NSLog(@"Version: %@ / Profile: %@", versionName, profileName);
     
     [MFF launchFirefox:versionName withProfile:profileName];
 }
 
 -(IBAction)ShowProfileManager:(id)sender {
+    shouldReloadProfiles = YES;
     [MFF openFirefoxProfilesWindow:[self GetSelectedVersion]];
+}
+
+-(IBAction)CreateApplication:(id)sender {
+    NSString *profileName = (NSString *)[[mProfilesController selectedObjects] objectAtIndex:0];
+    NSString *versionName = [self GetSelectedVersion];
+
+    [MFF createApplicationWithVersion:versionName andProfile:profileName];
 }
 
 #pragma mark Common Functions
@@ -96,16 +108,47 @@ BOOL alreadyChecked = NO;
     return versionName;
 }
 
+- (void) SelectProfileForVersion:(NSString *)version {
+    // Strip any directory paths
+    version = [version lastPathComponent];
+    BOOL versionIsPlain = [[version lowercaseString] isEqualToString:@"firefox"];
+
+    // Find the first profile whose name starts with the version name
+    NSArray *profiles = [mProfilesController arrangedObjects];
+    for (NSString *profile in profiles) {
+        if (
+            (versionIsPlain && [profile isEqualToString:@"default"]) ||
+            [profile hasPrefix:version]
+        ) {
+            [mProfilesController setSelectedObjects:[NSArray arrayWithObject:profile]];
+            break;
+        }
+    }
+}
+
+#pragma mark NSTableView Delegates
+
+- (void)tableViewSelectionDidChange:(NSNotification *)notification {
+    [self SelectProfileForVersion:[self GetSelectedVersion]];
+}
+
 #pragma mark Window Delegates
 
-- (BOOL)windowWillClose:(NSNotification *)notification {
+- (void)windowWillClose:(NSNotification *)notification {
     [NSApp terminate:self];
-    return NO;
+}
+
+- (void)windowDidBecomeMain:(NSNotification *)notification {
+    if (shouldReloadProfiles) {
+        NSArray *oldValues = [mProfilesController selectedObjects];
+        [self PopulateProfileValues];
+        [mProfilesController setSelectedObjects:oldValues];
+        shouldReloadProfiles = NO;
+    }
 }
 
 -(void)noProfilesOKClick:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void  *)contextInfo{
-    [MFF openFirefoxProfilesWindow:[self GetSelectedVersion]];
-    [NSApp terminate:self];
+    [self ShowProfileManager:nil];
 }
 
 #pragma mark Application Delegates
