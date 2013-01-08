@@ -20,7 +20,7 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
 {
     NSLog(@"version: %@", version);
     
-    NSString *toBeCalled = [[@"open \"" stringByAppendingString:[self getFirefoxPath:version]] stringByAppendingString: @"\" --args --profilemanager"];
+    NSString *toBeCalled = [[@"open -n \"" stringByAppendingString:[self getFirefoxPath:version]] stringByAppendingString: @"\" --args --profilemanager"];
     
     NSLog(@"Profile Launch call: %@", toBeCalled);
     
@@ -137,7 +137,7 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
 + (void) launchFirefox:(NSString *)version withProfile:(NSString *)profile
 {
     // Construct the command using 'open'
-    NSArray *cmdParts = [NSArray arrayWithObjects:@"open -a \"",
+    NSArray *cmdParts = [NSArray arrayWithObjects:@"open -na \"",
                          [__APPLICATIONS_PATH__ stringByAppendingPathComponent:version],
                          @".app\" --args -no-remote -P \"",
                          profile,
