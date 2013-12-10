@@ -50,28 +50,40 @@ BOOL shouldReloadProfiles = NO;
     NSString* lastVersion = [defaults objectForKey:@"lastVersion"];
     NSString* lastProfile = [defaults objectForKey:@"lastProfile"];
     
-    if (lastVersion) {
-        [mVersionsController setSelectedObjects:[NSArray arrayWithObject:lastVersion]];    
+    //The culprit code causing crash on start-up.
+    //If the defaults listed a version that no longer existed MF would crash on start-up.
+    //Wrapping this around a try catch block is a duck-tape fix.
+    @try {
+        if (lastVersion) {
+            [mVersionsController setSelectedObjects:[NSArray arrayWithObject:lastVersion]];
+        }
+        if (lastProfile) {
+            [mProfilesController setSelectedObjects:[NSArray arrayWithObject:lastProfile]];
+        }
     }
-    if (lastProfile) {
-        [mProfilesController setSelectedObjects:[NSArray arrayWithObject:lastProfile]];    
+    @catch (NSException *exception) {
+        NSLog(@"%@", exception.reason);
     }
   
 }
 
 - (void) showNotEnoughProfilesThingy
 {
-    NSBeginAlertSheet(@"You need to create a profile!",
-                      @"OK", 
-                      nil, 
-                      nil, 
-                      [self window], 
-                      self, 
-                      @selector(noProfilesOKClick:returnCode:contextInfo:),
-                      NULL, 
-                      NULL, 
-                      @"You only have one profile set up for Firefox.  In order to run multiple versions of Firefox side by side, you must have multiple profiles defined.\n\nClick OK to open the profile manager."
-                    );
+    //The previous alert never went away.
+    //I've instead changed it to this and it seems to be working correctly.
+    NSString *prompt = @"You need to create a profile!";
+    NSString *infoText = @"You only have one profile set up for Firefox.  In order to run multiple versions of Firefox side by side, you must have multiple profiles defined.\n\nClick OK to open the profile manager.";
+    
+    NSAlert *alert = [NSAlert alertWithMessageText: prompt
+                                     defaultButton:@"OK"
+                                   alternateButton:nil
+                                       otherButton:nil
+                         informativeTextWithFormat:infoText];
+    
+    [alert runModal];
+    //After alert has gone away, call up the method noProfilesOkClick
+    SEL aSel = @selector(noProfilesOKClick:returnCode:contextInfo:);
+    [self performSelector:aSel];
 }
 
 -(IBAction)LaunchFirefox:(id)sender {
