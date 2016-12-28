@@ -35,6 +35,9 @@ If you've followed the best practice above, the appropriate profile will be sele
 
 CHANGE LOG:
 
+2.4.0
+- Built against macOS Sierra 10.12
+
 2.3.0 (gilmoreorless)
 - New UI with better resizing response
 - Recurse into "Firefox" sub-directories to pick up installs from FFV script (https://github.com/micmcg/FFV)

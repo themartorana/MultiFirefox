@@ -92,7 +92,7 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
     }
 
     // Return our array
-    return nil;
+    return [NSArray array];
 }
 
 // Get the list of Firefox versions
