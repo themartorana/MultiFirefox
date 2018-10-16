@@ -72,13 +72,12 @@ BOOL shouldReloadProfiles = NO;
     //The previous alert never went away.
     //I've instead changed it to this and it seems to be working correctly.
     NSString *prompt = @"You need to create a profile!";
-    NSString *infoText = @"You only have one profile set up for Firefox.  In order to run multiple versions of Firefox side by side, you must have multiple profiles defined.\n\nClick OK to open the profile manager.";
-    
+
     NSAlert *alert = [NSAlert alertWithMessageText: prompt
                                      defaultButton:@"OK"
                                    alternateButton:nil
                                        otherButton:nil
-                         informativeTextWithFormat:infoText];
+                         informativeTextWithFormat:@"You only have one profile set up for Firefox.  In order to run multiple versions of Firefox side by side, you must have multiple profiles defined.\n\nClick OK to open the profile manager."];
     
     [alert runModal];
     //After alert has gone away, call up the method noProfilesOkClick

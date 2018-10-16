@@ -42,13 +42,13 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
     NSArray *folderContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderName error:nil];
     
     // Get the number of directories
-    int count = [folderContents count];
+    unsigned long count = [folderContents count];
     if ([folderContents containsObject:@".DS_Store"])
         count--;
     if ([folderContents containsObject:@".Trashes"])
         count--;
     
-    NSLog(@"final count is: %i\n", count);
+    NSLog(@"final count is: %lu\n", count);
     
     if (count <= 1)
         return NO;
