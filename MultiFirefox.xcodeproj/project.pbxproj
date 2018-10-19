@@ -12,14 +12,13 @@
 		5569ED0C0DB2C95900099182 /* INSTALL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5569ED0B0DB2C95900099182 /* INSTALL.txt */; };
 		5571D1950DB2C840003F0FEA /* MITLicense.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5571D1940DB2C840003F0FEA /* MITLicense.txt */; };
 		558BC9310DAE6E0300999EC4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 558BC9300DAE6E0300999EC4 /* Credits.rtf */; };
-		55B221280DA9DF110093DE58 /* firefox01_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 55B221270DA9DF110093DE58 /* firefox01_03.png */; };
 		55B221360DA9E3E90093DE58 /* MainWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B221350DA9E3E90093DE58 /* MainWindow.m */; };
 		55B221DA0DAA6DB90093DE58 /* MFF.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B221D90DAA6DB90093DE58 /* MFF.m */; };
-		55B691D00DAB35EF008E2C8B /* firefox01_03.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55B691CF0DAB35EF008E2C8B /* firefox01_03.icns */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		D5A09E15217688790048256B /* firefox.icns in Resources */ = {isa = PBXBuildFile; fileRef = D5A09E14217688790048256B /* firefox.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,14 +47,13 @@
 		5569ED0B0DB2C95900099182 /* INSTALL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = INSTALL.txt; sourceTree = "<group>"; };
 		5571D1940DB2C840003F0FEA /* MITLicense.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MITLicense.txt; sourceTree = "<group>"; };
 		558BC9300DAE6E0300999EC4 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
-		55B221270DA9DF110093DE58 /* firefox01_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = firefox01_03.png; sourceTree = "<group>"; };
 		55B221340DA9E3E90093DE58 /* MainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindow.h; sourceTree = "<group>"; };
 		55B221350DA9E3E90093DE58 /* MainWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainWindow.m; sourceTree = "<group>"; };
 		55B221D80DAA6DB90093DE58 /* MFF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFF.h; sourceTree = "<group>"; };
 		55B221D90DAA6DB90093DE58 /* MFF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFF.m; sourceTree = "<group>"; };
-		55B691CF0DAB35EF008E2C8B /* firefox01_03.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = firefox01_03.icns; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* MultiFirefox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiFirefox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5A09E14217688790048256B /* firefox.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = firefox.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,10 +130,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D5A09E14217688790048256B /* firefox.icns */,
 				5569ED0B0DB2C95900099182 /* INSTALL.txt */,
 				5571D1940DB2C840003F0FEA /* MITLicense.txt */,
-				55B691CF0DAB35EF008E2C8B /* firefox01_03.icns */,
-				55B221270DA9DF110093DE58 /* firefox01_03.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
@@ -190,7 +187,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 1000;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MultiFirefox" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -215,8 +212,7 @@
 			files = (
 				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
-				55B221280DA9DF110093DE58 /* firefox01_03.png in Resources */,
-				55B691D00DAB35EF008E2C8B /* firefox01_03.icns in Resources */,
+				D5A09E15217688790048256B /* firefox.icns in Resources */,
 				558BC9310DAE6E0300999EC4 /* Credits.rtf in Resources */,
 				5571D1950DB2C840003F0FEA /* MITLicense.txt in Resources */,
 				5569ED0C0DB2C95900099182 /* INSTALL.txt in Resources */,
@@ -262,7 +258,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 2.0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -277,8 +273,9 @@
 				GCC_PREFIX_HEADER = MultiFirefox_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.CodeContortionist.MultiFirefox;
 				PRODUCT_NAME = MultiFirefox;
 				SDKROOT = macosx;
 			};
@@ -288,7 +285,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -300,8 +297,9 @@
 				GCC_VERSION = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.CodeContortionist.MultiFirefox;
 				PRODUCT_NAME = MultiFirefox;
 				SDKROOT = macosx;
 			};
@@ -311,12 +309,35 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CURRENT_PROJECT_VERSION = 2.0.1;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_PREPROCESS = NO;
 				ONLY_ACTIVE_ARCH = YES;
@@ -329,10 +350,32 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				SDKROOT = macosx;
 			};

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment version="1050" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication"/>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application">
+        <customObject id="-3" userLabel="Application" customClass="NSObject">
             <connections>
                 <outlet property="delegate" destination="460" id="521"/>
             </connections>
@@ -320,7 +320,7 @@
             </items>
         </menu>
         <window title="MultiFirefox" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" frameAutosaveName="MFFFrame" animationBehavior="default" id="371" userLabel="Window (MultiFirefox)">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" unifiedTitleAndToolbar="YES"/>
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" topStrut="YES"/>
             <rect key="contentRect" x="44" y="424" width="529" height="282"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1366" height="746"/>
@@ -335,7 +335,7 @@
                     <imageView id="405">
                         <rect key="frame" x="20" y="114" width="124" height="123"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="firefox01_03" id="406"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="firefox" id="406"/>
                     </imageView>
                     <button id="525">
                         <rect key="frame" x="31" y="20" width="103" height="18"/>
@@ -365,7 +365,7 @@
                                 <rect key="frame" x="205" y="20" width="172" height="282"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" id="407">
+                                    <textField verticalHuggingPriority="750" id="407">
                                         <rect key="frame" x="-3" y="245" width="115" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Choose a Profile" id="408">
@@ -423,11 +423,11 @@
                                                 </tableView>
                                             </subviews>
                                         </clipView>
-                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="415">
+                                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="415">
                                             <rect key="frame" x="1" y="93" width="243" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
-                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="414">
+                                        <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="414">
                                             <rect key="frame" x="244" y="1" width="15" height="92"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
@@ -456,7 +456,7 @@
                                     <userLayoutGuide affinity="minX"/>
                                 </userGuides>
                                 <subviews>
-                                    <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" id="428">
+                                    <textField verticalHuggingPriority="750" id="428">
                                         <rect key="frame" x="-3" y="245" width="178" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Choose a Version" id="429">
@@ -502,11 +502,11 @@
                                                 </tableView>
                                             </subviews>
                                         </clipView>
-                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="490">
+                                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="490">
                                             <rect key="frame" x="1" y="77" width="243" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
-                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="491">
+                                        <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="491">
                                             <rect key="frame" x="244" y="1" width="15" height="76"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
@@ -560,6 +560,6 @@ DQ
         <userDefaultsController representsSharedInstance="YES" id="527"/>
     </objects>
     <resources>
-        <image name="firefox01_03" width="512" height="512"/>
+        <image name="firefox" width="512" height="512"/>
     </resources>
 </document>
