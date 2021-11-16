@@ -45,6 +45,8 @@ BOOL shouldReloadProfiles = NO;
     [self PopulateVersionValues];
     [mVersionsTable setDelegate:self];
     [mVersionsTable setDoubleAction:@selector(LaunchFirefox:)];
+    [mProfilesTable setDelegate:self];
+    [mProfilesTable setDoubleAction:@selector(LaunchFromProfileDblClick:)];
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString* lastVersion = [defaults objectForKey:@"lastVersion"];
@@ -85,18 +87,28 @@ BOOL shouldReloadProfiles = NO;
     [self performSelector:aSel];
 }
 
+-(void)LaunchFirefoxWithProfile:(NSString *)profileName {
+  NSString *versionName = [self GetSelectedVersion];
+  
+  NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+  [defaults setObject:profileName forKey:@"lastProfile"];
+  [defaults setObject:versionName forKey:@"lastVersion"];
+  [defaults synchronize];
+  
+  NSLog(@"Version: %@ / Profile: %@", versionName, profileName);
+  
+  [MFF launchFirefox:versionName withProfile:profileName];
+}
+
 -(IBAction)LaunchFirefox:(id)sender {
     NSString *profileName = (NSString *)[[mProfilesController selectedObjects] objectAtIndex:0];
-    NSString *versionName = [self GetSelectedVersion];
-    
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:profileName forKey:@"lastProfile"];
-    [defaults setObject:versionName forKey:@"lastVersion"];
-    [defaults synchronize];
-    
-    NSLog(@"Version: %@ / Profile: %@", versionName, profileName);
-    
-    [MFF launchFirefox:versionName withProfile:profileName];
+    [self LaunchFirefoxWithProfile:profileName];
+}
+
+-(IBAction)LaunchFromProfileDblClick:(id)sender {
+    NSInteger rowNumber = [mProfilesTable clickedRow];
+    NSString *profileName = (NSString *)[[mProfilesController arrangedObjects] objectAtIndex:rowNumber];
+    [self LaunchFirefoxWithProfile:profileName];
 }
 
 -(IBAction)ShowProfileManager:(id)sender {
